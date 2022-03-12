@@ -1,4 +1,5 @@
 const Chore = require("../models/chore.model");
+const User = require("../models/user.model");
 
 module.exports = {
   getAllChores: (req, res) => {
@@ -14,7 +15,10 @@ module.exports = {
   },
 
   creatNewChore: (req, res) => {
-    Chore.create(req.body)
+    const newChoreObject = new Chore(req.body);
+    newChoreObject.createdBy = req.jwtpayload.id;
+    newChoreObject
+      .save()
       .then((newChore) => {
         console.log(newChore);
         res.json(newChore);

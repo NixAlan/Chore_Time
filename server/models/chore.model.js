@@ -1,16 +1,23 @@
 const mongoose = require("mongoose");
 
-const ChoreSchema = new mongoose.Schema({
-  name: {
-    type: String,
+const ChoreSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+    },
+    completedBy: {
+      type: String,
+    },
+    credit: {
+      type: Number,
+    },
+    createdBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
   },
-  completedBy: {
-    type: String,
-  },
-  credit: {
-    type: Number,
-  },
-});
+  { timestamps: true }
+);
 
 const Chore = mongoose.model("Chore", ChoreSchema);
 
