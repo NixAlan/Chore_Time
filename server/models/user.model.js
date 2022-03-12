@@ -41,7 +41,7 @@ UserSchema.pre("save", function (next) {
     next();
   });
 });
-
+// User is the collection name
 const User = mongoose.model("User", UserSchema);
 
 module.exports = User;

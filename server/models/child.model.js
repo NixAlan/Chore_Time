@@ -1,13 +1,20 @@
 const mongoose = require("mongoose");
 
-const ChildSchema = new mongoose.Schema({
-  name: {
-    type: String,
+const ChildSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+    },
+    allowanceEarned: {
+      type: Number,
+    },
+    createdBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
   },
-  allowanceEarned: {
-    type: Number,
-  },
-});
+  { timeseries: true }
+);
 
 const Child = mongoose.model("Child", ChildSchema);
 

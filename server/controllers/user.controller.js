@@ -85,11 +85,29 @@ module.exports = {
     });
   },
 
-  getOneUser: (req, res) => {
-    User.findOne({ _id: req.params.id })
-      .then((oneUser) => {
-        console.log(oneUser);
-        res.json(oneUser);
+  // getOneUser: (req, res) => {
+  //   User.findOne({ _id: req.params.id })
+  //     .then((oneUser) => {
+  //       console.log(oneUser);
+  //       res.json(oneUser);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //       res.status(400).json(err);
+  //     });
+  // },
+
+  getLoggedInUser: (req, res) => {
+    User.findOne({ _id: req.jwtpayload.id }) // req.jwtpayload.id from jwt.config
+      .then((user) => res.json(user))
+      .catch((err) => res.json(err));
+  },
+
+  getAllUsers: (req, res) => {
+    User.find()
+      .then((allUsers) => {
+        console.log(allUsers);
+        res.json(allUsers);
       })
       .catch((err) => {
         console.log(err);

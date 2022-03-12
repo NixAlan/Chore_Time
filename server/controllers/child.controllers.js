@@ -1,8 +1,11 @@
 const Child = require("../models/child.model");
+const jwt = require("jsonwebtoken");
+const User = require("../models/user.model");
 
 module.exports = {
   findAllChildren: (req, res) => {
     Child.find()
+      .populate("createdBy", "username email") // I can use populate on any method to get needed fields from user model
       .then((allKids) => {
         console.log(allKids);
         res.json(allKids);
@@ -14,14 +17,37 @@ module.exports = {
   },
 
   createChild: (req, res) => {
-    Child.create(req.body)
+    const newChildObject = new Child(req.body);
+    // when user logs in there is a cookie in the request,
+    //we name the cookie usertoken in the user controller
+    //.
+    //.
+    // const decodedJWT = jwt.decode(req.cookies.usertoken, {
+    //   complete: true,
+    // });
+    //.
+    //.
+    //adding feild of createdBy to the newChildObject
+    //with the value of cookie usertoken's payload
+    //.
+    //.newChildObject.createdBy = decodedJWT.payload.id;
+    //.
+    //.
+    // I can use req.jwtpayload from authenticate middlewere created in jwt.config
+    newChildObject.createdBy = req.jwtpayload.id;
+    //.
+    //.
+    //.
+    // console.log("devlog", newChildObject, decodedJWT.payload);
+    newChildObject
+      .save()
       .then((newChild) => {
         console.log(newChild);
         res.json(newChild);
       })
       .catch((err) => {
-        console.log("Create Child Failed");
-        res.status(400).json({ message: "Create Child Failed", error: err });
+        console.log("Create Child Failed1");
+        res.status(400).json({ message: "Create Child Failed1", error: err });
       });
   },
 
@@ -66,5 +92,36 @@ module.exports = {
           .status(400)
           .json({ message: "update one child Failed", error: err });
       });
+  },
+
+  findAllChildrenByUser: (req, res) => {
+    if (req.jwtpayload.username !== req.params.username) {
+      User.findOne({ username: req.params.username }) // need to require User / Calling findOne User in the child controllers
+        .then((userNotLoggedIn) => {
+          Child.find({ createdBy: userNotLoggedIn._id })
+            .then((allGamesFromUser) => {
+              console.log(allGamesFromUser);
+              res.json(allGamesFromUser);
+            })
+            .catch((err) => {
+              console.log(err);
+              res.status(400).json(err);
+            });
+        })
+        .catch((err) => {
+          console.log(err);
+          res.status(400).json(err);
+        });
+    } else {
+      Child.find({ createdBy: req.jwtpayload.id })
+        .then((allChildrenFromLoggedInUser) => {
+          console.log(allChildrenFromLoggedInUser);
+          res.json(allChildrenFromLoggedInUser);
+        })
+        .catch((err) => {
+          console.log(err);
+          res.status(400).json(err);
+        });
+    }
   },
 };
