@@ -8,6 +8,9 @@ const ChildSchema = new mongoose.Schema(
     allowanceEarned: {
       type: Number,
     },
+    creditEarned: {
+      type: Number,
+    },
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",

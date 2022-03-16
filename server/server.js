@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
-    // credentia)ls: true
+    credentials: true,
     origin: "http://localhost:3000",
   })
 );

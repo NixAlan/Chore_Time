@@ -99,18 +99,22 @@ module.exports = {
       User.findOne({ username: req.params.username }) // need to require User / Calling findOne User in the child controllers
         .then((userNotLoggedIn) => {
           Child.find({ createdBy: userNotLoggedIn._id })
-            .then((allGamesFromUser) => {
-              console.log(allGamesFromUser);
-              res.json(allGamesFromUser);
+            .then((ChildrenFromUser) => {
+              console.log(ChildrenFromUser);
+              res.json(ChildrenFromUser);
             })
             .catch((err) => {
-              console.log(err);
-              res.status(400).json(err);
+              console.log("Find Children from logged out User Failed 1", err);
+              res
+                .status(400)
+                .json("Find Children from logged out User Failed 1", err);
             });
         })
         .catch((err) => {
-          console.log(err);
-          res.status(400).json(err);
+          console.log("find Children from user failed 2", err);
+          res
+            .status(400)
+            .json({ message: "find Children from user failed 2", error: err });
         });
     } else {
       Child.find({ createdBy: req.jwtpayload.id })
@@ -119,8 +123,11 @@ module.exports = {
           res.json(allChildrenFromLoggedInUser);
         })
         .catch((err) => {
-          console.log(err);
-          res.status(400).json(err);
+          console.log("find Children from loggin user failed", err);
+          res.status(400).json({
+            message: "find Children from loggin user failed",
+            error: err,
+          });
         });
     }
   },

@@ -1,5 +1,6 @@
 const Chore = require("../models/chore.model");
 const User = require("../models/user.model");
+const childControllers = require("./child.controllers");
 
 module.exports = {
   getAllChores: (req, res) => {
@@ -69,5 +70,46 @@ module.exports = {
           .status(400)
           .json({ message: "update one chore Failed", error: err });
       });
+  },
+
+  findAllChoresByUser: (req, res) => {
+    if (req.jwtpayload.username !== req.params.username) {
+      User.findOne({ username: req.params.username })
+        .then((userNotLoggedIn) => {
+          Chore.find({ createdBy: userNotLoggedIn._id })
+            .then((choresFromUser) => {
+              console.log(choresFromUser);
+              res.json(choresFromUser);
+            })
+            .catch((err) => {
+              console.log("find chores from logged out user failed 1", err);
+              res
+                .status(400)
+                .json({
+                  message: "find chores from logge dout user failed 1",
+                  error: err,
+                });
+            });
+        })
+        .catch((err) => {
+          console.log("find chores from logged out user failed 2", err);
+          res
+            .status(400)
+            .json({
+              message: "find chores from logged out user failed 2",
+              error: err,
+            });
+        });
+    } else {
+      Chore.find({ createdBy: req.jwtpayload.id })
+        .then((childrenFromLoggedInUser) => {
+          console.log(childrenFromLoggedInUser);
+          res.json(childrenFromLoggedInUser);
+        })
+        .catch((err) => {
+          console.log("find chores from loggin user failed", err);
+          res.status(400).json("find chores from loggin user failed", err);
+        });
+    }
   },
 };

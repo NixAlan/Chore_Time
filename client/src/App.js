@@ -1,23 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import LogInView from "./views/LogIn";
+import { Router } from "@reach/router";
+import RegView from "./views/Reg";
+import HomeView from "./views/HomeView";
+import AddChildView from "./views/AddChildView";
+import AddChoreView from "./views/AddChoreView";
+import OneChoreView from "./views/OneChoreView";
+import OneChildView from "./views/OneChildView";
+import EndOFWeekView from "./views/EndOfWeekView";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <HomeView path="/" />
+        <LogInView path="/login" />
+        <RegView path="/reg" />
+        <AddChildView path="/addChildView" />
+        <AddChoreView path="/addChoreView" />
+        <EndOFWeekView path="/endofweekvew" />
+        <OneChoreView path="/oneChoreView/edit/:id" />
+        <OneChildView path="/oneChildView/edit/:id" />
+      </Router>
     </div>
   );
 }

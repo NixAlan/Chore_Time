@@ -7,4 +7,9 @@ module.exports = (app) => {
   app.delete("/api/chore/:completedBy", ChoreController.deleteChores);
   app.post("/api/chore", authenticate, ChoreController.creatNewChore);
   app.put("/api/chore/:id", ChoreController.updateOneChore);
+  app.get(
+    "/api/chore/fromuser/:username",
+    authenticate,
+    ChoreController.findAllChoresByUser
+  );
 };
