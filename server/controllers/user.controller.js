@@ -27,7 +27,7 @@ module.exports = {
       .then((userRecord) => {
         // email was not found
         if (userRecord === null) {
-          res.status(400).json({ message: "Invalid login Attempt1" });
+          res.status(400).json({ message: "login and or email invalid" });
         } else {
           // email is found
           bcrypt

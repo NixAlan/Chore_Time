@@ -18,6 +18,7 @@ const handleLogOut = () => {
     .then((res) => {
       console.log(res);
       console.log(res.data);
+      localStorage.removeItem("username");
       navigate("/login");
     })
     .catch((err) => {
@@ -112,40 +113,44 @@ const Home = (props) => {
       <div>
         <button onClick={handleNavigateResults}>Current Status</button>
       </div>
-      <button onClick={handleAddChild}>Add Child</button>
-      {childList
-        ? childList.map((child, index) => {
-            return (
-              <div key={index}>
-                <div>
-                  <p>{child.name}</p>
-                  <button onClick={() => handleRemoveChild(child._id)}>
-                    Remove Child
-                  </button>
-                  <button onClick={() => handleNavigate(child._id)}>
-                    {child.name} name
-                  </button>
-                </div>
-              </div>
-            );
-          })
-        : null}
-      <div>
-        <button onClick={handleAddChore}>Add Chore</button>
-        {choreList
-          ? choreList.map((chore, index) => {
-              return (
-                <div key={index}>
-                  <div>
-                    <p>{chore.name}</p>
-                    <button onClick={() => handleAssign(chore._id)}>
-                      Asign to Child
-                    </button>
+      <div className="dashboardContainer">
+        <div className="childListContainer">
+          <button onClick={handleAddChild}>Add Child</button>
+          {childList
+            ? childList.map((child, index) => {
+                return (
+                  <div key={index}>
+                    <div>
+                      <p>{child.name}</p>
+                      <button onClick={() => handleRemoveChild(child._id)}>
+                        Remove Child
+                      </button>
+                      <button onClick={() => handleNavigate(child._id)}>
+                        {child.name}
+                      </button>
+                    </div>
                   </div>
-                </div>
-              );
-            })
-          : null}
+                );
+              })
+            : null}
+        </div>
+        <div className="choreListContainer">
+          <button onClick={handleAddChore}>Add Chore</button>
+          {choreList
+            ? choreList.map((chore, index) => {
+                return (
+                  <div key={index}>
+                    <div>
+                      <p>{chore.name}</p>
+                      <button onClick={() => handleAssign(chore._id)}>
+                        Asign to Child
+                      </button>
+                    </div>
+                  </div>
+                );
+              })
+            : null}
+        </div>
       </div>
       <div>
         <button onClick={handleLogOut}>logout</button>

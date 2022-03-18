@@ -7,6 +7,7 @@ const Login = (props) => {
     email: "",
     password: "",
   });
+  const [errors, setErrors] = useState({});
   const newSateObject = { ...login };
   const onChangeHandle = (e) => {
     newSateObject[e.target.name] = e.target.value;
@@ -35,6 +36,8 @@ const Login = (props) => {
       })
       .catch((err) => {
         console.log(err);
+        console.log(err.response.data.message);
+        setErrors(err.response.data);
       });
   };
   return (
@@ -57,6 +60,7 @@ const Login = (props) => {
             value={login.password}
             onChange={(e) => onChangeHandle(e)}
           />
+          {errors ? <p>{errors.message}</p> : null}
         </div>
         <button onClick={handleLogin}>Submit</button>
       </form>

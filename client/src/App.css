@@ -6,4 +6,22 @@
   width: 50%;
   justify-content: space-evenly;
   margin: 0 auto;
+  background-color: lightblue;
+  border: 2px solid black;
+  padding: 15px;
+}
+h1 {
+  color: teal;
+}
+.dashboardContainer {
+  display: flex;
+  width: 50%;
+  margin: 0 auto;
+  justify-content: space-around;
+  border: 2px solid black;
+  padding: 15px;
+  background-color: teal;
+}
+p {
+  color: white;
 }

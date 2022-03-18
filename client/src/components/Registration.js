@@ -9,7 +9,7 @@ const Registration = (props) => {
     password: "",
     confirmPassword: "",
   });
-  const [error, setErrors] = useState({});
+  const [errors, setErrors] = useState({});
   const newSateObject = { ...registration };
   const onChangeHandle = (e) => {
     newSateObject[e.target.name] = e.target.value;
@@ -30,8 +30,11 @@ const Registration = (props) => {
       })
       .catch((err) => {
         console.log(err);
-        console.log("err.response", err.response);
-        setErrors(err.response.data.error.errors);
+        console.log(
+          "err.response",
+          err.response.data.errors.confirmPassword.message
+        );
+        setErrors(err.response.data);
       });
   };
   return (
@@ -45,6 +48,7 @@ const Registration = (props) => {
             value={registration.email}
             onChange={(e) => onChangeHandle(e)}
           />
+          {errors.errors ? <p>{errors.errors.email.message}</p> : null}
         </div>
         <div>
           <label>User Name:</label>
@@ -54,6 +58,7 @@ const Registration = (props) => {
             value={registration.userName}
             onChange={(e) => onChangeHandle(e)}
           />
+          {errors.errors ? <p>{errors.errors.username.message}</p> : null}
         </div>
         <div>
           <label>Password:</label>
@@ -63,6 +68,7 @@ const Registration = (props) => {
             value={registration.password}
             onChange={(e) => onChangeHandle(e)}
           />
+          {errors.errors ? <p>{errors.errors.password.message}</p> : null}
         </div>
         <div>
           <label>Confirm Password:</label>
@@ -72,6 +78,9 @@ const Registration = (props) => {
             value={registration.confirmPassword}
             onChange={(e) => onChangeHandle(e)}
           />
+          {errors.errors ? (
+            <p>{errors.errors.confirmPassword.message}</p>
+          ) : null}
         </div>
         <button onClick={submitHandle}>Submit</button>
       </form>

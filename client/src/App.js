@@ -13,12 +13,12 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <HomeView path="/" />
-        <LogInView path="/login" />
+        <LogInView path="/" />
         <RegView path="/reg" />
+        <HomeView path="/parentDashbord" />
         <AddChildView path="/addChildView" />
         <AddChoreView path="/addChoreView" />
-        <EndOFWeekView path="/endofweekvew" />
+        <EndOFWeekView path="/endOfWeekView" />
         <OneChoreView path="/oneChoreView/edit/:id" />
         <OneChildView path="/oneChildView/edit/:id" />
       </Router>

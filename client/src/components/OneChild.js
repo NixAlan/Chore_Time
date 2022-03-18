@@ -7,53 +7,62 @@ const OneChild = (props) => {
   const [child, setChild] = useState({});
   const [choreList, setChoreList] = useState([]);
   const [credit, setCredit] = useState(0);
+  const [disable, setDisable] = useState(false);
 
   useEffect(() => {
     const getChildById = async () => {
-      const res = await axios.get(`http://localhost:8000/api/children/${id}`);
-      console.log(res);
-      console.log(res.data);
-      setChild(res.data);
-      const childName = res.data.name;
-      const res2 = await axios.get(
-        `http://localhost:8000/api/chore/fromuser/${localStorage.getItem(
-          "username"
-        )}`,
-        {
-          withCredentials: true,
+      try {
+        const res = await axios.get(`http://localhost:8000/api/children/${id}`);
+        console.log(res);
+        console.log(res.data);
+        setChild(res.data);
+        const childName = res.data.name;
+        const res2 = await axios.get(
+          `http://localhost:8000/api/chore/fromuser/${localStorage.getItem(
+            "username"
+          )}`,
+          {
+            withCredentials: true,
+          }
+        );
+
+        const tempChoreList = res2.data.filter(
+          (chore, index) => chore.completedBy === childName
+        );
+
+        let tempCredit = 0;
+        for (let i = 0; i < tempChoreList.length; i++) {
+          tempCredit = tempCredit + tempChoreList[i].credit;
         }
-      );
-
-      const tempChoreList = res2.data.filter(
-        (chore, index) => chore.completedBy === childName
-      );
-
-      let tempCredit = 0;
-      for (let i = 0; i < tempChoreList.length; i++) {
-        tempCredit = tempCredit + tempChoreList[i].credit;
+        console.log("devlog", tempCredit);
+        setChoreList(tempChoreList);
+        setCredit(tempCredit);
+      } catch (err) {
+        console.log(err);
       }
-      console.log("devlog", tempCredit);
-      setChoreList(tempChoreList);
-      setCredit(tempCredit);
     };
 
     getChildById();
   }, []);
 
   const handleUpdate = async () => {
-    const res = await axios.put(`http://localhost:8000/api/children/${id}`, {
-      creditEarned: credit,
-    });
+    if (credit < 1) {
+      setDisable(true);
+    } else {
+      const res = await axios.put(`http://localhost:8000/api/children/${id}`, {
+        creditEarned: credit,
+      });
 
-    console.log(res);
-    console.log(res.data);
+      console.log(res);
+      console.log(res.data);
 
-    const res2 = await axios.delete(
-      `http://localhost:8000/api/chore/${child.name}`
-    );
-    console.log(res2);
-    console.log(res2.data);
-    navigate("/");
+      const res2 = await axios.delete(
+        `http://localhost:8000/api/chore/${child.name}`
+      );
+      console.log(res2);
+      console.log(res2.data);
+      navigate("/");
+    }
   };
 
   return (
@@ -85,7 +94,10 @@ const OneChild = (props) => {
           })}
         </tbody>
       </table>
-      <button onClick={handleUpdate}>Update Points</button>
+      <button disabled={disable} onClick={handleUpdate}>
+        Update Points
+      </button>
+      {disable ? <p>Points Must be greater then 0 to Update</p> : null}
     </div>
   );
 };
