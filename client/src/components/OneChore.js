@@ -57,14 +57,14 @@ const OneChore = (props) => {
       .then((res) => {
         console.log(res);
         console.log(res.data);
-        navigate("/");
+        navigate("/parentDashboard");
       })
       .catch((err) => {
         console.log("update chore failed", err);
       });
   };
   return (
-    <div>
+    <div className="oneContainer">
       <div className="container">
         <div>
           <p>Completed By:</p>

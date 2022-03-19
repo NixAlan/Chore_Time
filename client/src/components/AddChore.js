@@ -31,7 +31,7 @@ const AddChore = (props) => {
         .then((res) => {
           console.log(res);
           console.log(res.data);
-          navigate("/");
+          navigate("/parentDashboard");
         })
         .catch((err) => {
           console.log(err);
@@ -41,7 +41,7 @@ const AddChore = (props) => {
     }
   };
   return (
-    <div>
+    <div className="oneContainer">
       <form>
         <div>
           <label>name:</label>

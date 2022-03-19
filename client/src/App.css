@@ -7,7 +7,9 @@
   justify-content: space-evenly;
   margin: 0 auto;
   background-color: lightblue;
-  border: 2px solid black;
+  border-top: 2px solid black;
+  border-left: 2px solid black;
+  border-right: 2px solid black;
   padding: 15px;
 }
 h1 {
@@ -22,6 +24,25 @@ h1 {
   padding: 15px;
   background-color: teal;
 }
+.oneContainer {
+  width: 50%;
+  border: 2px solid black;
+  padding: 15px;
+  margin: 0 auto;
+  background-color: teal;
+}
+h3 {
+  color: lightgray;
+}
+th {
+  color: lightGray;
+}
 p {
-  color: white;
+  color: lightGray;
+}
+td {
+  color: lightGray;
+}
+label {
+  color: lightGray;
 }

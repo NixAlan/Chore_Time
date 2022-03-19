@@ -61,12 +61,12 @@ const OneChild = (props) => {
       );
       console.log(res2);
       console.log(res2.data);
-      navigate("/");
+      navigate("/parentDashboard");
     }
   };
 
   return (
-    <div>
+    <div className="oneContainer">
       <div>
         <h3>{child.name}</h3>
         <h3>Points Earned this week: {credit}</h3>
@@ -76,6 +76,7 @@ const OneChild = (props) => {
           width: "50%",
           margin: "0 auto",
         }}
+        className="table-borderless"
       >
         <thead>
           <th>Chore Name:</th>

@@ -15,7 +15,7 @@ function App() {
       <Router>
         <LogInView path="/" />
         <RegView path="/reg" />
-        <HomeView path="/parentDashbord" />
+        <HomeView path="/parentDashboard" />
         <AddChildView path="/addChildView" />
         <AddChoreView path="/addChoreView" />
         <EndOFWeekView path="/endOfWeekView" />

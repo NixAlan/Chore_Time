@@ -2,30 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { navigate } from "@reach/router";
 
-const handleAddChild = () => {
-  navigate("/addChildView");
-};
-const handleAddChore = () => {
-  navigate("/addChoreView");
-};
-const handleNavigate = (idFromBelow) => {
-  navigate(`/oneChildView/edit/${idFromBelow}`);
-};
-const handleLogOut = () => {
-  axios
-    .post("http://localhost:8000/api/users/logout")
-
-    .then((res) => {
-      console.log(res);
-      console.log(res.data);
-      localStorage.removeItem("username");
-      navigate("/login");
-    })
-    .catch((err) => {
-      console.log("log out unseccessful");
-      console.log(err);
-    });
-};
 const Home = (props) => {
   const [childList, setChildList] = useState([]);
   const [user, setUser] = useState("");
@@ -104,18 +80,15 @@ const Home = (props) => {
         console.log(err);
       });
   };
-  const handleNavigateResults = () => {
-    navigate("/endofweekvew");
+
+  const handleNavigate = (idFromBelow) => {
+    navigate(`/oneChildView/edit/${idFromBelow}`);
   };
 
   return (
     <div>
-      <div>
-        <button onClick={handleNavigateResults}>Current Status</button>
-      </div>
       <div className="dashboardContainer">
         <div className="childListContainer">
-          <button onClick={handleAddChild}>Add Child</button>
           {childList
             ? childList.map((child, index) => {
                 return (
@@ -135,7 +108,6 @@ const Home = (props) => {
             : null}
         </div>
         <div className="choreListContainer">
-          <button onClick={handleAddChore}>Add Chore</button>
           {choreList
             ? choreList.map((chore, index) => {
                 return (
@@ -151,9 +123,6 @@ const Home = (props) => {
               })
             : null}
         </div>
-      </div>
-      <div>
-        <button onClick={handleLogOut}>logout</button>
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { navigate } from "@reach/router";
 
@@ -8,9 +8,12 @@ const EndOfWeek = () => {
   const [aatw, setAatw] = useState(15); // Allowance Available this week
   const [poinstPerChild, setPointsPerChild] = useState([]);
   const [childAllowanceEearnedArr, setChildAllowanceEarnedArr] = useState([]);
+  const credits = useRef();
 
   useEffect(() => {
+    console.log(credits);
     const getChildById = async () => {
+      const log = await console.log(credits);
       const res = await axios.get(
         `http://localhost:8000/api/children/fromuser/${localStorage.getItem(
           "username"
@@ -41,6 +44,7 @@ const EndOfWeek = () => {
         allowanceEarnedPerChildArr.push(tempAllowanceEarned);
       }
       console.log(allowanceEarnedPerChildArr);
+      setChildAllowanceEarnedArr(allowanceEarnedPerChildArr);
 
       //   console.log(
       //     "devlog",
@@ -98,12 +102,13 @@ const EndOfWeek = () => {
   //   };
   //};
   return (
-    <div>
+    <div className="oneContainer">
       <table
         style={{
           width: "50%",
           margin: "0 auto",
         }}
+        className="table-borderless"
       >
         <thead>
           <div>
@@ -129,7 +134,10 @@ const EndOfWeek = () => {
               <tr key={index}>
                 <td>{child.name}</td>
                 <td>{child.creditEarned}</td>
-                <td>{Math.floor((aatw / totalPoints) * child.creditEarned)}</td>
+                <td ref={credits}>
+                  {" "}
+                  {Math.floor((aatw / totalPoints) * child.creditEarned)}
+                </td>
                 <td>{child.allowanceEarned}</td>
                 <td>
                   <button>Make Allowance Payment</button>

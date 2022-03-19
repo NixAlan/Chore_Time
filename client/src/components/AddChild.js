@@ -30,7 +30,7 @@ const AddChild = (props) => {
         .then((res) => {
           console.log(res);
           console.log(res.data);
-          navigate("/");
+          navigate("/parentDashboard");
         })
         .catch((err) => {
           console.log("add Child Failed");
@@ -44,7 +44,7 @@ const AddChild = (props) => {
   };
 
   return (
-    <div>
+    <div className="oneContainer">
       <form>
         <div>
           <label>Child Name:</label>

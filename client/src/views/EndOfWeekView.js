@@ -5,7 +5,7 @@ import Header from "../components/Header";
 const EndOFWeekView = (props) => {
   return (
     <div>
-      <Header link={"/"} linkText={"Back to HOme"} title={"Current Status"} />
+      <Header title={"Current Status"} />
       <EndOfWeek />
     </div>
   );
