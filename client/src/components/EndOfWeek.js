@@ -10,6 +10,7 @@ const EndOfWeek = () => {
   const [childAllowanceEearnedArr, setChildAllowanceEarnedArr] = useState([]);
   const [disable, setDisable] = useState(false);
   const [processError, setProcessError] = useState("");
+  const [payment, setPayment] = useState(0);
 
   useEffect(() => {
     const getChildById = async () => {
@@ -33,53 +34,9 @@ const EndOfWeek = () => {
       setPointsPerChild(tempPointsEarnedPerChild);
       setChildList(tempChildList);
       setTotalPoints(tempTotalPoints);
-      // var allowanceEarnedPerChildArr = [];
-      // for (let i = 0; i < childList.length; i++) {
-      //   var tempAllowanceEarned = 0;
-      //   tempAllowanceEarned =
-      //     tempAllowanceEarned[i] +
-      //     Math.floor((aatw / totalPoints) * childList[i].creditEarned);
-      //   console.log("devlog arr fire");
-      //   allowanceEarnedPerChildArr.push(tempAllowanceEarned);
-      // }
-      // console.log(allowanceEarnedPerChildArr);
-      // setChildAllowanceEarnedArr(allowanceEarnedPerChildArr);
-
-      //   console.log(
-      //     "devlog",
-      //     allowanceEarnedPerChildArr,
-      //     tempAllowanceEarned,
-      //     aatw,
-      //     totalPoints,
-      //     childList[1].creditEarned,
-      //     childList.length
-      //   );
     };
     getChildById();
   }, []);
-  //   const handleChange = (e) => {
-  //     e.preventDefault();
-  //     setAatw(e.target.vaule);
-  //   };
-
-  // const handleUpdate = async () => {
-  //     const res = await axios.put(`http://localhost:8000/api/children/${id}`, {
-  //         allowanceEarned:
-  //       });
-
-  //       console.log(res);
-  //       console.log(res.data);
-  // }
-
-  //   const handleUpdate = (e) => {
-  //     e.preventDefault();
-
-  //   };
-
-  //   const newChildSateObject =
-
-  //   newChildSateObject[e.target.name] = e.target.value;
-  //   setChildList[i] = newChildSateObject;
 
   const onProcess = async () => {
     if (totalPoints < 1) {
@@ -117,25 +74,36 @@ const EndOfWeek = () => {
       }
     }
   };
-  // try {
-  // var allowanceEarnedPerChildArr = [];
-  // for (let i = 0; i < childList.length; i++) {
-  //   var tempAllowanceEarned = 0;
-  //   tempAllowanceEarned = Math.floor(
-  //     (aatw / totalPoints) * childList[i].creditEarned
-  //   );
-  //   console.log("devlog arr fire");
-  //   allowanceEarnedPerChildArr.push(tempAllowanceEarned);
-  // }
-  // setChildAllowanceEarnedArr(allowanceEarnedPerChildArr);
-  // {
-  //   for (let j = 0; j < childList.length; j++) {}
-  //   const res = await axios.put();
-  //     catch (err) {}
-  //   };
-  //};
+
+  const onSetPayment = (e) => {
+    var tempPayment = payment;
+    tempPayment = tempPayment - tempPayment * 2;
+    setPayment(tempPayment);
+  };
+  const makePayment = (idFromBelow) => {
+    axios(`http://localhost:8000/api/children/${idFromBelow}`, {
+      allowanceEarned: payment,
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <div className="oneContainer">
+      <div>
+        <label>Allowance Available This Week</label>
+        <input
+          name="aatw"
+          type="Number"
+          value={aatw}
+          onChange={(e) => setAatw(e.target.value)}
+        />
+        <label>Allowance Payment Amount</label>
+        <input type="number" value={payment} onChange={onSetPayment} />
+      </div>
       <table
         style={{
           width: "50%",
@@ -144,15 +112,6 @@ const EndOfWeek = () => {
         className="table-borderless"
       >
         <thead>
-          <div>
-            <label>Allowance Available This Week</label>
-            <input
-              name="aatw"
-              type="Number"
-              value={aatw}
-              onChange={(e) => setAatw(e.target.value)}
-            />
-          </div>
           <tr>
             <th>Chore Name:</th>
             <th>Points Earned This Week:</th>
@@ -174,7 +133,9 @@ const EndOfWeek = () => {
                 </td>
                 <td>{child.allowanceEarned}</td>
                 <td>
-                  <button>Make Allowance Payment</button>
+                  <button onClick={() => makePayment(child._id)}>
+                    Make Allowance Payment
+                  </button>
                 </td>
               </tr>
             );
