@@ -1,17 +1,6 @@
 .App {
   text-align: center;
 }
-.headerrow {
-  display: flex;
-  width: 50%;
-  justify-content: space-evenly;
-  margin: 0 auto;
-  background-color: lightblue;
-  border-top: 2px solid black;
-  border-left: 2px solid black;
-  border-right: 2px solid black;
-  padding: 15px;
-}
 h1 {
   color: teal;
 }
@@ -45,4 +34,44 @@ td {
 }
 label {
   color: lightGray;
+}
+.containerReg {
+  display: flex;
+  align-items: center;
+  width: 75%;
+  margin: 0 auto;
+  justify-content: space-around;
+}
+.containerCol {
+  display: flex;
+
+  flex-direction: column;
+}
+input {
+  margin-bottom: 16px;
+}
+.headerContainer {
+  display: flex;
+  width: 50%;
+  padding: 15px;
+  margin: 0 auto;
+  background-color: lightblue;
+  border-top: 2px solid black;
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+  justify-content: space-around;
+}
+.headerRow {
+  display: flex;
+  justify-content: end;
+}
+.headerCol1 {
+  flex: 1;
+  align-items: flex-end;
+}
+.headerCol2 {
+  flex: 2;
+}
+Link {
+  font-size: 10px;
 }
