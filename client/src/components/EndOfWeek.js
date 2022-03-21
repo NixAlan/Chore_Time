@@ -75,21 +75,27 @@ const EndOfWeek = () => {
     }
   };
 
-  const onSetPayment = (e) => {
-    var tempPayment = payment;
-    tempPayment = tempPayment - tempPayment * 2;
+  const onSetPaymentAmount = (e) => {
+    let tempPayment = e.target.value;
+    tempPayment = -1 * Math.abs(tempPayment);
     setPayment(tempPayment);
   };
-  const makePayment = (idFromBelow) => {
-    axios(`http://localhost:8000/api/children/${idFromBelow}`, {
-      allowanceEarned: payment,
-    })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  const makePayment = async (idFromBelow) => {
+    const res = await axios.get(
+      `http://localhost:8000/api/children/${idFromBelow}`
+    );
+
+    console.log(res.data.allowanceEarned);
+    let tempPayment = res.data.allowanceEarned;
+    tempPayment = tempPayment + payment;
+    console.log("devlog", tempPayment);
+    const res2 = await axios.put(
+      `http://localhost:8000/api/children/${idFromBelow}`,
+      {
+        allowanceEarned: tempPayment,
+      }
+    );
+    console.log(res2);
   };
   return (
     <div className="oneContainer">
@@ -102,14 +108,18 @@ const EndOfWeek = () => {
           onChange={(e) => setAatw(e.target.value)}
         />
         <label>Allowance Payment Amount</label>
-        <input type="number" value={payment} onChange={onSetPayment} />
+        <input
+          type="number"
+          value={parseInt(Math.abs(payment))}
+          onChange={(e) => onSetPaymentAmount(e)}
+        />
       </div>
       <table
         style={{
           width: "50%",
           margin: "0 auto",
         }}
-        className="table-borderless"
+        // className="table-borderless"
       >
         <thead>
           <tr>

@@ -38,49 +38,64 @@ const Registration = (props) => {
       });
   };
   return (
-    <div>
+    <div className="oneContainer">
       <form>
-        <div>
-          <label>Email:</label>
-          <input
-            type="text"
-            name="email"
-            value={registration.email}
-            onChange={(e) => onChangeHandle(e)}
-          />
-          {errors.errors ? <p>{errors.errors.email.message}</p> : null}
-        </div>
-        <div>
-          <label>User Name:</label>
-          <input
-            type="text"
-            name="username"
-            value={registration.userName}
-            onChange={(e) => onChangeHandle(e)}
-          />
-          {errors.errors ? <p>{errors.errors.username.message}</p> : null}
-        </div>
-        <div>
-          <label>Password:</label>
-          <input
-            type="password"
-            name="password"
-            value={registration.password}
-            onChange={(e) => onChangeHandle(e)}
-          />
-          {errors.errors ? <p>{errors.errors.password.message}</p> : null}
-        </div>
-        <div>
-          <label>Confirm Password:</label>
-          <input
-            type="password"
-            name="confirmPassword"
-            value={registration.confirmPassword}
-            onChange={(e) => onChangeHandle(e)}
-          />
-          {errors.errors ? (
-            <p>{errors.errors.confirmPassword.message}</p>
-          ) : null}
+        <div className="containerReg">
+          <div className="containerCol">
+            <p>Email:</p>
+            <p>User Name:</p>
+            <p>Password:</p>
+            <p>Confirm Password:</p>
+          </div>
+          <div className="containerCol">
+            <p>
+              {" "}
+              <input
+                type="text"
+                name="email"
+                value={registration.email}
+                onChange={(e) => onChangeHandle(e)}
+              />
+            </p>
+            {errors.errors ? <p>{errors.errors.email.message}</p> : null}
+            <p>
+              <input
+                type="text"
+                name="username"
+                value={registration.userName}
+                onChange={(e) => onChangeHandle(e)}
+              />
+            </p>
+            {errors.errors ? <p>{errors.errors.username.message}</p> : null}
+            <p>
+              <input
+                type="password"
+                name="password"
+                value={registration.password}
+                onChange={(e) => onChangeHandle(e)}
+              />
+            </p>
+            {errors.errors ? <p>{errors.errors.password.message}</p> : null}
+            <p>
+              <input
+                type="password"
+                name="confirmPassword"
+                value={registration.confirmPassword}
+                onChange={(e) => onChangeHandle(e)}
+              />
+            </p>
+            {errors.errors ? (
+              <p>{errors.errors.confirmPassword.message}</p>
+            ) : null}
+          </div>
+          {/* <div>
+           
+
+          </div>
+          <div>
+           
+
+          </div> */}
         </div>
         <button onClick={submitHandle}>Submit</button>
       </form>

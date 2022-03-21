@@ -22,16 +22,40 @@ const Header = (props) => {
   };
   return (
     <header>
-      <div className="headerrow">
-        <h1>{title}</h1>
-        <nav>
-          <Link to="/parentDashboard">Dashboard</Link>
-          <Link to="/addChildView">Add Child</Link>
-          <Link to="/addChoreView">Add Chore</Link>
-          <Link to="/endOfWeekView">End Of Week</Link>
-        </nav>
-        <div>
-          <button onClick={handleLogOut}>logout</button>
+      <div className="headerContainer">
+        <div className="headerCol1">
+          <h1>{title}</h1>
+        </div>
+        <div className="headerCol2">
+          <div className="headerRow">
+            <Link
+              style={{ fontSize: "small", marginRight: "5px" }}
+              to="/parentDashboard"
+            >
+              Dashboard
+            </Link>
+            <Link
+              style={{ fontSize: "small", marginRight: "5px" }}
+              to="/addChildView"
+            >
+              Add Child
+            </Link>
+            <Link
+              style={{ fontSize: "small", marginRight: "5px" }}
+              to="/addChoreView"
+            >
+              Add Chore
+            </Link>
+            <Link
+              style={{ fontSize: "small", marginRight: "5px" }}
+              to="/endOfWeekView"
+            >
+              End Of Week
+            </Link>
+          </div>
+          <div className="headerRow">
+            <button onClick={handleLogOut}>logout</button>
+          </div>
         </div>
       </div>
     </header>
