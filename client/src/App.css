@@ -75,3 +75,6 @@ input {
 Link {
   font-size: 10px;
 }
+.containerRow {
+  text-align: left;
+}

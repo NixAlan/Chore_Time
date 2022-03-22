@@ -10,7 +10,7 @@ const OneChild = (props) => {
   const [disable, setDisable] = useState(false);
 
   useEffect(() => {
-    const getChildById = async () => {
+    const getChildById = async (props) => {
       try {
         const res = await axios.get(`http://localhost:8000/api/children/${id}`);
         console.log(res);
@@ -68,7 +68,7 @@ const OneChild = (props) => {
   return (
     <div className="oneContainer">
       <div>
-        <h3>{child.name}</h3>
+        <h3>chores completed by {child.name} this week</h3>
         <h3>Points Earned this week: {credit}</h3>
       </div>
       <table
@@ -79,9 +79,11 @@ const OneChild = (props) => {
         className="table-borderless"
       >
         <thead>
-          <th>Chore Name:</th>
-          <th>Points:</th>
-          <th>Date Completed:</th>
+          <tr>
+            <th>Chore Name:</th>
+            <th>Points:</th>
+            <th>Date Completed:</th>
+          </tr>
         </thead>
         <tbody>
           {choreList.map((chore, index) => {

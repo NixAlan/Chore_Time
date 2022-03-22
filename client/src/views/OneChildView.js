@@ -6,7 +6,7 @@ const OneChildView = (props) => {
   const { id } = props;
   return (
     <div>
-      <Header />
+      <Header title={""} />
       <OneChild id={id} />
     </div>
   );

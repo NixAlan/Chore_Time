@@ -7,10 +7,11 @@ const EndOfWeek = () => {
   const [totalPoints, setTotalPoints] = useState(0);
   const [aatw, setAatw] = useState(15); // Allowance Available this week
   const [poinstPerChild, setPointsPerChild] = useState([]);
-  const [childAllowanceEearnedArr, setChildAllowanceEarnedArr] = useState([]);
+  // const [childAllowanceEearnedArr, setChildAllowanceEarnedArr] = useState([]);
   const [disable, setDisable] = useState(false);
   const [processError, setProcessError] = useState("");
   const [payment, setPayment] = useState(0);
+  const [loading, setLoadding] = useState(true);
 
   useEffect(() => {
     const getChildById = async () => {
@@ -46,7 +47,6 @@ const EndOfWeek = () => {
       );
     } else {
       var tempChildList = [...childList];
-      console.log("devlog");
       for (let i = 0; i < tempChildList.length; i++) {
         tempChildList[i].allowanceEarned =
           tempChildList[i].allowanceEarned +
@@ -81,45 +81,68 @@ const EndOfWeek = () => {
     setPayment(tempPayment);
   };
   const makePayment = async (idFromBelow) => {
-    const res = await axios.get(
-      `http://localhost:8000/api/children/${idFromBelow}`
-    );
+    if (loading) {
+      const res = await axios.get(
+        `http://localhost:8000/api/children/${idFromBelow}`
+      );
 
-    console.log(res.data.allowanceEarned);
-    let tempPayment = res.data.allowanceEarned;
-    tempPayment = tempPayment + payment;
-    console.log("devlog", tempPayment);
-    const res2 = await axios.put(
-      `http://localhost:8000/api/children/${idFromBelow}`,
-      {
-        allowanceEarned: tempPayment,
-      }
-    );
-    console.log(res2);
+      console.log(res.data.allowanceEarned);
+      let tempPayment = res.data.allowanceEarned;
+      tempPayment = tempPayment + payment;
+      console.log("devlog", tempPayment);
+      const res2 = await axios
+        .put(`http://localhost:8000/api/children/${idFromBelow}`, {
+          allowanceEarned: tempPayment,
+        })
+        .then((res) => {
+          console.log(res.data);
+
+          for (let i = 0; i < childList.length; i++) {
+            if (childList[i]._id === idFromBelow) {
+              childList[i].allowanceEarned = res.data.allowanceEarned;
+              return;
+            }
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      console.log(res2);
+      let tempLoad = false;
+      setLoadding(tempLoad);
+    } else {
+      let tempLoad = true;
+      setLoadding(tempLoad);
+    }
   };
   return (
     <div className="oneContainer">
-      <div>
-        <label>Allowance Available This Week</label>
-        <input
-          name="aatw"
-          type="Number"
-          value={aatw}
-          onChange={(e) => setAatw(e.target.value)}
-        />
-        <label>Allowance Payment Amount</label>
-        <input
-          type="number"
-          value={parseInt(Math.abs(payment))}
-          onChange={(e) => onSetPaymentAmount(e)}
-        />
+      <div className="containerRow">
+        <div>
+          <label>Allowance Available This Week:</label>
+          <input
+            name="aatw"
+            type="Number"
+            value={aatw}
+            onChange={(e) => setAatw(e.target.value)}
+            style={{ marginLeft: "5px" }}
+          />
+        </div>
+        <div style={{ marginTop: "5px" }}>
+          <label>Allowance Payment Amount:</label>
+          <input
+            type="number"
+            value={parseInt(Math.abs(payment))}
+            onChange={(e) => onSetPaymentAmount(e)}
+            style={{ marginLeft: "22px" }}
+          />
+        </div>
       </div>
       <table
         style={{
-          width: "50%",
+          width: "100%",
           margin: "0 auto",
         }}
-        // className="table-borderless"
       >
         <thead>
           <tr>

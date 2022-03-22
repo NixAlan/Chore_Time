@@ -5,7 +5,7 @@ import Header from "../components/Header";
 const AddChoreView = (props) => {
   return (
     <div>
-      <Header title={"Add A Chore"} />
+      <Header title={"Add A Chore to the chore list"} />
       <AddChore />
     </div>
   );

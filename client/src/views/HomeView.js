@@ -5,7 +5,7 @@ import Header from "../components/Header";
 const HomeView = (props) => {
   return (
     <div>
-      <Header title={"Dashboard"} />
+      <Header title={`Welcome ${localStorage.getItem("username")}`} />
       <Home />
     </div>
   );

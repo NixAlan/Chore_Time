@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { navigate } from "@reach/router";
+import { navigate, Link } from "@reach/router";
 
 const Home = (props) => {
   const [childList, setChildList] = useState([]);
@@ -67,40 +67,40 @@ const Home = (props) => {
     navigate(`oneChoreView/edit/${idFromBelow}`);
   };
 
-  const handleRemoveChild = (idFromBelow) => {
-    axios
-      .delete(`http://localhost:8000/api/children/${idFromBelow}`)
-      .then((res) => {
-        console.log(res.data);
-        setChildList(
-          childList.filter((child, index) => child._id !== idFromBelow)
-        );
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const handleNavigate = (idFromBelow) => {
-    navigate(`/oneChildView/edit/${idFromBelow}`);
-  };
+  // const handleRemoveChild = (idFromBelow) => {
+  //   axios
+  //     .delete(`http://localhost:8000/api/children/${idFromBelow}`)
+  //     .then((res) => {
+  //       console.log(res.data);
+  //       setChildList(
+  //         childList.filter((child, index) => child._id !== idFromBelow)
+  //       );
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
 
   return (
     <div>
       <div className="dashboardContainer">
         <div className="childListContainer">
+          <p>Select a Child to check which chores they have completed</p>
           {childList
             ? childList.map((child, index) => {
                 return (
                   <div key={index}>
                     <div>
-                      <p>{child.name}</p>
-                      <button onClick={() => handleRemoveChild(child._id)}>
-                        Remove Child
-                      </button>
-                      <button onClick={() => handleNavigate(child._id)}>
+                      <Link
+                        style={{ color: "lightgray" }}
+                        to={`/oneChildView/edit/${child._id}`}
+                      >
+                        {" "}
                         {child.name}
-                      </button>
+                      </Link>
+                      {/* <button onClick={() => handleRemoveChild(child._id)}>
+                        Remove Child
+                      </button> */}
                     </div>
                   </div>
                 );

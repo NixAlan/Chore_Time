@@ -24,7 +24,7 @@ const Header = (props) => {
     <header>
       <div className="headerContainer">
         <div className="headerCol1">
-          <h1>{title}</h1>
+          <h5>{title}</h5>
         </div>
         <div className="headerCol2">
           <div className="headerRow">

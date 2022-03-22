@@ -6,7 +6,6 @@ const OneChore = (props) => {
   const { id } = props;
   const [chore, setChore] = useState({});
   const [childList, setChildList] = useState([]);
-  const [tempCompleted, setTempCompleted] = useState("");
 
   useEffect(() => {
     axios
@@ -33,8 +32,6 @@ const OneChore = (props) => {
         }
       )
       .then((res) => {
-        //console.log(res);
-        //console.log(res.data);
         setChildList(res.data);
       })
       .catch((err) => {
@@ -43,10 +40,8 @@ const OneChore = (props) => {
   }, []);
 
   const handleChange = (e) => {
-    // setTempCompleted(e.target.value);
     const tempChore = { ...chore };
     tempChore.completedBy = e.target.value;
-    // tempChore.comPletedBy = tempCompleted;
     setChore(tempChore);
   };
 

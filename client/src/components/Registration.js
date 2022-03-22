@@ -26,14 +26,14 @@ const Registration = (props) => {
       .then((res) => {
         console.log(res);
         console.log(res.data);
-        navigate("/login");
+        navigate("/");
       })
       .catch((err) => {
         console.log(err);
-        console.log(
-          "err.response",
-          err.response.data.errors.confirmPassword.message
-        );
+        // console.log(
+        //   "err.response",
+        //   err.response.data.errors.confirmPassword.message
+        // );
         setErrors(err.response.data);
       });
   };
