@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import AddChore from "../components/AddChore";
 import Header from "../components/Header";
 

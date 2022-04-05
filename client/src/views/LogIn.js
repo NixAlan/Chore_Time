@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import Login from "../components/Login";
-import Header from "../components/Header";
 import { Link } from "@reach/router";
 
 const LogInView = (props) => {

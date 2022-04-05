@@ -7,7 +7,6 @@ const EndOfWeek = () => {
   const [totalPoints, setTotalPoints] = useState(0);
   const [aatw, setAatw] = useState(15); // Allowance Available this week
   const [poinstPerChild, setPointsPerChild] = useState([]);
-  // const [childAllowanceEearnedArr, setChildAllowanceEarnedArr] = useState([]);
   const [disable, setDisable] = useState(false);
   const [processError, setProcessError] = useState("");
   const [payment, setPayment] = useState(0);
@@ -58,6 +57,7 @@ const EndOfWeek = () => {
       setTotalPoints(0);
 
       for (let j = 0; j < childList.length; j++) {
+        //update each childs convert cedits to allowance earned
         console.log(childList[j]._id);
         axios
           .put(`http://localhost:8000/api/children/${childList[j]._id}`, {
@@ -86,10 +86,9 @@ const EndOfWeek = () => {
         `http://localhost:8000/api/children/${idFromBelow}`
       );
 
-      console.log(res.data.allowanceEarned);
+      //console.log(res.data.allowanceEarned);
       let tempPayment = res.data.allowanceEarned;
       tempPayment = tempPayment + payment;
-      console.log("devlog", tempPayment);
       const res2 = await axios
         .put(`http://localhost:8000/api/children/${idFromBelow}`, {
           allowanceEarned: tempPayment,
@@ -98,6 +97,7 @@ const EndOfWeek = () => {
           console.log(res.data);
 
           for (let i = 0; i < childList.length; i++) {
+            // update allowanceEarned after allowance payment
             if (childList[i]._id === idFromBelow) {
               childList[i].allowanceEarned = res.data.allowanceEarned;
               return;

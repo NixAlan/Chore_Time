@@ -1,6 +1,6 @@
+import React from "react";
 import Header from "../components/Header";
 import OneChild from "../components/OneChild";
-import React, { useEffect, useState } from "react";
 
 const OneChildView = (props) => {
   const { id } = props;

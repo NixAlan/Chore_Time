@@ -1,85 +1,55 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { navigate, Link } from "@reach/router";
-// 900 lines
+//900
 const Home = (props) => {
   const [childList, setChildList] = useState([]);
   const [user, setUser] = useState("");
   const [choreList, setChoreList] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:8000/api/users/secure", {
-        withCredentials: true,
-      })
-      .then((res) => {
-        //console.log(res);
-        console.log(res.data);
+    const getAppInfo = async () => {
+      try {
+        const res = await axios.get("http://localhost:8000/api/users/secure", {
+          withCredentials: true,
+        });
+        console.log(res);
         setUser(res.data);
-        //console.log("devlog", user.username);
-        localStorage.setItem("username", res.data.username);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+        console.log(user);
+
+        const res2 = await axios.get(
+          `http://localhost:8000/api/children/fromuser/${res.data.username}`,
+          {
+            withCredentials: true,
+          }
+        );
+        console.log("devlog", res2);
+        console.log(res2);
+        setChildList(res2.data);
+
+        const res3 = await axios.get(
+          `http://localhost:8000/api/chore/fromuser/${res.data.username}`,
+          {
+            withCredentials: true,
+          }
+        );
+
+        console.log(res3);
+        setChoreList(
+          res3.data.filter(
+            (chore, index) =>
+              chore.completedBy === "notcomplete" || chore.completedBy === ""
+          )
+        );
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getAppInfo();
   }, []);
-
-  useEffect(() => {
-    if (user) {
-      axios
-        .get(`http://localhost:8000/api/children/fromuser/${user.username}`, {
-          withCredentials: true,
-        })
-        .then((res) => {
-          //console.log(res);
-          //console.log(res.data);
-          setChildList(res.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  }, [user]);
-
-  useEffect(() => {
-    if (user) {
-      axios
-        .get(`http://localhost:8000/api/chore/fromuser/${user.username}`, {
-          withCredentials: true,
-        })
-        .then((res) => {
-          console.log(res);
-          console.log(res.data);
-          console.log("devlog", choreList);
-          setChoreList(
-            res.data.filter(
-              (chore, index) =>
-                chore.completedBy === "notcomplete" || chore.completedBy === ""
-            )
-          );
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  }, [user]);
   const handleAssign = (idFromBelow) => {
     navigate(`oneChoreView/edit/${idFromBelow}`);
   };
-
-  // const handleRemoveChild = (idFromBelow) => {
-  //   axios
-  //     .delete(`http://localhost:8000/api/children/${idFromBelow}`)
-  //     .then((res) => {
-  //       console.log(res.data);
-  //       setChildList(
-  //         childList.filter((child, index) => child._id !== idFromBelow)
-  //       );
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
 
   return (
     <div>

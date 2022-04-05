@@ -30,10 +30,6 @@ const Registration = (props) => {
       })
       .catch((err) => {
         console.log(err);
-        // console.log(
-        //   "err.response",
-        //   err.response.data.errors.confirmPassword.message
-        // );
         setErrors(err.response.data);
       });
   };
@@ -88,14 +84,6 @@ const Registration = (props) => {
               <p>{errors.errors.confirmPassword.message}</p>
             ) : null}
           </div>
-          {/* <div>
-           
-
-          </div>
-          <div>
-           
-
-          </div> */}
         </div>
         <button onClick={submitHandle}>Submit</button>
       </form>

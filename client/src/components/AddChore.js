@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { navigate } from "@reach/router";
 import axios from "axios";
 
@@ -36,7 +36,6 @@ const AddChore = (props) => {
         .catch((err) => {
           console.log(err);
           console.log("err.response", err.response);
-          // setErrors(err.response.data.error.errors);
         });
     }
   };

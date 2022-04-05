@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { navigate } from "@reach/router";
-import Header from "./Header";
 
 const AddChild = (props) => {
   const [childName, setChildName] = useState("");
