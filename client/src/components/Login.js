@@ -41,30 +41,48 @@ const Login = (props) => {
       });
   };
   return (
-    <div className="oneContainer">
-      <form>
-        <div>
-          <label>Email:</label>
-          <input
-            type="text"
-            name="email"
-            value={login.email}
-            onChange={(e) => onChangeHandle(e)}
-          />
-        </div>
-        <div>
-          <label>Password:</label>
-          <input
-            type="text"
-            name="password"
-            value={login.password}
-            onChange={(e) => onChangeHandle(e)}
-          />
-          {errors ? <p>{errors.message}</p> : null}
-        </div>
-        <button onClick={handleLogin}>Submit</button>
-      </form>
-    </div>
+    <form>
+      {/* Email input */}
+      <div className="form-outline mb-4">
+        <input
+          type="text"
+          className="form-control"
+          //style={{ width: "25%" }}
+          name="email"
+          value={login.email}
+          onChange={(e) => onChangeHandle(e)}
+        />
+        <label className="form-label">Email: </label>
+      </div>
+      <div className="form-outline mb-4">
+        <input
+          className="form-control"
+          type="text"
+          name="password"
+          value={login.password}
+          onChange={(e) => onChangeHandle(e)}
+        />
+        <label className="form-label">Password: </label>
+      </div>
+      {errors ? <p>{errors.message}</p> : null}
+
+      {/* <div class="form-outline mb-4">
+        <input type="email" id="form1Example1" class="form-control" />
+        <label class="form-label" for="form1Example1">
+          Email address
+        </label>
+      </div>
+
+      <div class="form-outline mb-4">
+        <input type="password" id="form1Example2" class="form-control" />
+        <label class="form-label" for="form1Example2">
+          Password
+        </label>
+      </div> */}
+      <button className="btn btn-primary" onClick={handleLogin}>
+        Submit
+      </button>
+    </form>
   );
 };
 
