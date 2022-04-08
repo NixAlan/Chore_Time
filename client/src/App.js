@@ -8,7 +8,7 @@ import AddChoreView from "./views/AddChoreView";
 import OneChoreView from "./views/OneChoreView";
 import OneChildView from "./views/OneChildView";
 import EndOFWeekView from "./views/EndOfWeekView";
-
+import "mdb-ui-kit";
 function App() {
   return (
     <div className="App">

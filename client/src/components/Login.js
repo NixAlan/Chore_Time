@@ -9,6 +9,13 @@ const Login = (props) => {
   });
   const [errors, setErrors] = useState({});
   const newSateObject = { ...login };
+
+  useEffect(() => {
+    document.querySelectorAll(".form-outline").forEach((formOutline) => {
+      new mdb.Input(formOutline).init();
+    });
+  }, []);
+
   const onChangeHandle = (e) => {
     newSateObject[e.target.name] = e.target.value;
     console.log("e.target.name =", e.target.name);
@@ -42,30 +49,30 @@ const Login = (props) => {
   };
   return (
     <form>
-      {/* Email input */}
-      <div className="form-outline mb-4">
-        <input
-          type="text"
-          className="form-control"
-          //style={{ width: "25%" }}
-          name="email"
-          value={login.email}
-          onChange={(e) => onChangeHandle(e)}
-        />
-        <label className="form-label">Email: </label>
+      <div className="container col-md-4 border mb-4 pt-4 ">
+        <div className="form-outline mb-4">
+          <input
+            type="text"
+            className="form-control"
+            //style={{ width: "25%" }}
+            name="email"
+            value={login.email}
+            onChange={(e) => onChangeHandle(e)}
+          />
+          <label className="form-label">Email: </label>
+        </div>
+        <div className="form-outline mb-4">
+          <input
+            className="form-control"
+            type="text"
+            name="password"
+            value={login.password}
+            onChange={(e) => onChangeHandle(e)}
+          />
+          <label className="form-label">Password: </label>
+        </div>
+        {errors ? <p>{errors.message}</p> : null}
       </div>
-      <div className="form-outline mb-4">
-        <input
-          className="form-control"
-          type="text"
-          name="password"
-          value={login.password}
-          onChange={(e) => onChangeHandle(e)}
-        />
-        <label className="form-label">Password: </label>
-      </div>
-      {errors ? <p>{errors.message}</p> : null}
-
       {/* <div class="form-outline mb-4">
         <input type="email" id="form1Example1" class="form-control" />
         <label class="form-label" for="form1Example1">
