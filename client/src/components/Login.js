@@ -10,11 +10,11 @@ const Login = (props) => {
   const [errors, setErrors] = useState({});
   const newSateObject = { ...login };
 
-  useEffect(() => {
-    document.querySelectorAll(".form-outline").forEach((formOutline) => {
-      new mdb.Input(formOutline).init();
-    });
-  }, []);
+  // useEffect(() => {
+  //   document.querySelectorAll(".form-outline").forEach((formOutline) => {
+  //     new mdb.Input(formOutline).init();
+  //   });
+  // }, []);
 
   const onChangeHandle = (e) => {
     newSateObject[e.target.name] = e.target.value;
