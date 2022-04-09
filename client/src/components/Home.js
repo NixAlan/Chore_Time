@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { navigate, Link } from "@reach/router";
+import { MDBContainer, MDBRow, MDBCol, MDBBtn } from "mdb-react-ui-kit";
 //900
 const Home = (props) => {
   const [childList, setChildList] = useState([]);
@@ -52,9 +53,12 @@ const Home = (props) => {
   };
 
   return (
-    <div>
-      <div className="dashboardContainer">
-        <div className="childListContainer">
+    <MDBContainer
+      className="border"
+      style={{ backgroundColor: "#E0F2F1", width: "80%" }}
+    >
+      <MDBRow around>
+        <MDBCol size="4" className="">
           <p>Select a Child to check which chores they have completed</p>
           {childList
             ? childList.map((child, index) => {
@@ -62,7 +66,7 @@ const Home = (props) => {
                   <div key={index}>
                     <div>
                       <Link
-                        style={{ color: "lightgray" }}
+                        style={{ color: "black" }}
                         to={`/oneChildView/edit/${child._id}`}
                       >
                         {" "}
@@ -76,25 +80,26 @@ const Home = (props) => {
                 );
               })
             : null}
-        </div>
-        <div className="choreListContainer">
+        </MDBCol>
+
+        <MDBCol size="4" className="col-example">
           {choreList
             ? choreList.map((chore, index) => {
                 return (
                   <div key={index}>
-                    <div>
-                      <p>{chore.name}</p>
-                      <button onClick={() => handleAssign(chore._id)}>
+                    <MDBContainer className="mb-2">
+                      <p className="mb-0">{chore.name}</p>
+                      <MDBBtn size="sm" onClick={() => handleAssign(chore._id)}>
                         Asign to Child
-                      </button>
-                    </div>
+                      </MDBBtn>
+                    </MDBContainer>
                   </div>
                 );
               })
             : null}
-        </div>
-      </div>
-    </div>
+        </MDBCol>
+      </MDBRow>
+    </MDBContainer>
   );
 };
 

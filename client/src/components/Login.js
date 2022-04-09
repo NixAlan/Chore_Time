@@ -1,6 +1,13 @@
 import { navigate } from "@reach/router";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import {
+  MDBInput,
+  MDBCol,
+  MDBRow,
+  MDBBtn,
+  MDBCheckbox,
+} from "mdb-react-ui-kit";
 
 const Login = (props) => {
   const [login, setLogin] = useState({
@@ -9,12 +16,6 @@ const Login = (props) => {
   });
   const [errors, setErrors] = useState({});
   const newSateObject = { ...login };
-
-  useEffect(() => {
-    document.querySelectorAll(".form-outline").forEach((formOutline) => {
-      new mdb.Input(formOutline).init();
-    });
-  }, []);
 
   const onChangeHandle = (e) => {
     newSateObject[e.target.name] = e.target.value;
@@ -49,28 +50,53 @@ const Login = (props) => {
   };
   return (
     <form>
+      {/* <MDBInput
+        className="mb-4"
+        type="email"
+        id="form1Example1"
+        label="Email address"
+      />
+      <MDBInput
+        className="mb-4"
+        type="password"
+        id="form1Example2"
+        label="Password"
+      />
+
+      <MDBRow className="mb-4">
+        <MDBCol className="d-flex justify-content-center">
+          <MDBCheckbox id="form1Example3" label="Remember me" defaultChecked />
+        </MDBCol>
+        <MDBCol>
+          <a href="#!">Forgot password?</a>
+        </MDBCol>
+      </MDBRow>
+
+      <MDBBtn type="submit" block>
+        Sign in
+      </MDBBtn> */}
+
       <div className="container col-md-4 border mb-4 pt-4 ">
-        <div className="form-outline mb-4">
-          <input
-            type="text"
-            className="form-control"
-            //style={{ width: "25%" }}
-            name="email"
-            value={login.email}
-            onChange={(e) => onChangeHandle(e)}
-          />
-          <label className="form-label">Email: </label>
-        </div>
-        <div className="form-outline mb-4">
-          <input
-            className="form-control"
-            type="text"
-            name="password"
-            value={login.password}
-            onChange={(e) => onChangeHandle(e)}
-          />
-          <label className="form-label">Password: </label>
-        </div>
+        <MDBInput
+          className="mb-4"
+          type="email"
+          label="Email"
+          name="email"
+          value={login.email}
+          onChange={(e) => onChangeHandle(e)}
+        />
+
+        <MDBInput
+          className="mb-4"
+          type="password"
+          label="password"
+          name="password"
+          value={login.password}
+          onChange={(e) => onChangeHandle(e)}
+        />
+        <MDBBtn type="submit" onClick={handleLogin}>
+          Submit
+        </MDBBtn>
         {errors ? <p>{errors.message}</p> : null}
       </div>
       {/* <div class="form-outline mb-4">
@@ -85,10 +111,10 @@ const Login = (props) => {
         <label class="form-label" for="form1Example2">
           Password
         </label>
-      </div> */}
+      </div> 
       <button className="btn btn-primary" onClick={handleLogin}>
         Submit
-      </button>
+      </button> */}
     </form>
   );
 };

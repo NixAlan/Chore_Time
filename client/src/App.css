@@ -72,7 +72,7 @@ input {
 .headerCol2 {
   flex: 2;
 }
-Link {
+link {
   font-size: 10px;
 }
 .containerRow {
