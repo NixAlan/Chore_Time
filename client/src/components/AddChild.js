@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { navigate } from "@reach/router";
+import { MDBContainer, MDBInput, MDBBtn } from "mdb-react-ui-kit";
 
 const AddChild = (props) => {
   const [childName, setChildName] = useState("");
@@ -43,21 +44,24 @@ const AddChild = (props) => {
   };
 
   return (
-    <div className="oneContainer">
+    <MDBContainer className="border">
       <form>
-        <div>
-          <label>Child Name:</label>
-          <input
+        <MDBContainer className="col-md-4">
+          <MDBInput
+            className="mb-4"
             type="text"
             name="name"
+            label="Child Name"
             value={childName}
             onChange={handleName}
           />
-        </div>
+        </MDBContainer>
       </form>
-      <button onClick={handleAddChild}>Add Child</button>
+      <MDBBtn color="info" className="mb3" onClick={handleAddChild}>
+        Add Child
+      </MDBBtn>
       {error ? <p>{error}</p> : null}
-    </div>
+    </MDBContainer>
   );
 };
 

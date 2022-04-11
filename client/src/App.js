@@ -9,6 +9,7 @@ import AddChoreView from "./views/AddChoreView";
 import OneChoreView from "./views/OneChoreView";
 import OneChildView from "./views/OneChildView";
 import EndOFWeekView from "./views/EndOfWeekView";
+//import "mdbreact";
 function App() {
   return (
     <div className="App">

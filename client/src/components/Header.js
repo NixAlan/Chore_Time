@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "@reach/router";
 import axios from "axios";
 import { navigate } from "@reach/router";
+import { MDBContainer, MDBRow, MDBCol, MDBBtn } from "mdb-react-ui-kit";
 
 const Header = (props) => {
   const { link, linkText, title } = props;
@@ -23,42 +24,52 @@ const Header = (props) => {
   };
   return (
     <header>
-      <div className="headerContainer">
-        <div className="headerCol1">
-          <h5>{title}</h5>
-        </div>
-        <div className="headerCol2">
-          <div className="headerRow">
-            <Link
-              style={{ fontSize: "small", marginRight: "5px" }}
-              to="/parentDashboard"
-            >
-              Dashboard
-            </Link>
-            <Link
-              style={{ fontSize: "small", marginRight: "5px" }}
-              to="/addChildView"
-            >
-              Add Child
-            </Link>
-            <Link
-              style={{ fontSize: "small", marginRight: "5px" }}
-              to="/addChoreView"
-            >
-              Add Chore
-            </Link>
-            <Link
-              style={{ fontSize: "small", marginRight: "5px" }}
-              to="/endOfWeekView"
-            >
-              End Of Week
-            </Link>
-          </div>
-          <div className="headerRow">
-            <button onClick={handleLogOut}>logout</button>
-          </div>
-        </div>
-      </div>
+      <MDBContainer
+        className="border p-1"
+        style={{ backgroundColor: "#e0f2f1" }}
+      >
+        <MDBRow around>
+          <MDBCol className="">
+            <h5>{title}</h5>
+          </MDBCol>
+          <MDBCol className="">
+            <div className="headerRow">
+              <Link
+                style={{ fontSize: "small", marginRight: "5px" }}
+                to="/parentDashboard"
+              >
+                Dashboard
+              </Link>
+              <Link
+                style={{ fontSize: "small", marginRight: "5px" }}
+                to="/addChildView"
+              >
+                Add Child
+              </Link>
+              <Link
+                style={{ fontSize: "small", marginRight: "5px" }}
+                to="/addChoreView"
+              >
+                Add Chore
+              </Link>
+              <Link
+                style={{ fontSize: "small", marginRight: "5px" }}
+                to="/endOfWeekView"
+              >
+                End Of Week
+              </Link>
+              <MDBBtn
+                color="light"
+                //className="ms-2"
+                size="sm"
+                onClick={handleLogOut}
+              >
+                logout
+              </MDBBtn>
+            </div>
+          </MDBCol>
+        </MDBRow>
+      </MDBContainer>
     </header>
   );
 };

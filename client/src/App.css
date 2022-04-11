@@ -1,10 +1,7 @@
 .App {
   text-align: center;
 }
-/* h1 {
-  color: teal;
-}
-.dashboardContainer {
+/* .dashboardContainer {
   display: flex;
   width: 50%;
   margin: 0 auto;
@@ -12,30 +9,30 @@
   border: 2px solid black;
   padding: 15px;
   background-color: teal;
-}
-.oneContainer {
+} */
+/* .oneContainer {
   width: 50%;
   border: 2px solid black;
   padding: 15px;
   margin: 0 auto;
   background-color: teal;
-}
-h3 {
+} */
+/* h3 {
   color: lightgray;
 }
 th {
   color: lightGray;
-}
-p {
+} */
+/* p {
   color: lightGray;
-}
-td {
+} */
+/* td {
   color: lightGray;
 }
 label {
   color: lightGray;
-}
-.containerReg {
+} */
+/* .containerReg {
   display: flex;
   align-items: center;
   width: 75%;
@@ -49,13 +46,13 @@ label {
 }
 input {
   margin-bottom: 16px;
-}
+} */
 .headerContainer {
   display: flex;
-  width: 50%;
+  width: 80%;
   padding: 15px;
   margin: 0 auto;
-  background-color: lightblue;
+  background-color: #e0f2f1;
   border-top: 2px solid black;
   border-left: 2px solid black;
   border-right: 2px solid black;
@@ -72,9 +69,9 @@ input {
 .headerCol2 {
   flex: 2;
 }
-link {
+/* link {
   font-size: 10px;
 }
 .containerRow {
   text-align: left;
-} */
+}  */

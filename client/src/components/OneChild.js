@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { navigate } from "@reach/router";
+import { MDBContainer, MDBRow, MDBCol, MDBBtn } from "mdb-react-ui-kit";
 
 const OneChild = (props) => {
   const { id } = props;
@@ -66,7 +67,7 @@ const OneChild = (props) => {
   };
 
   return (
-    <div className="oneContainer">
+    <MDBContainer className="border">
       <div>
         <h3>chores completed by {child.name} this week</h3>
         <h3>Points Earned this week: {credit}</h3>
@@ -101,7 +102,7 @@ const OneChild = (props) => {
         Update Points
       </button>
       {disable ? <p>Points Must be greater then 0 to Update</p> : null}
-    </div>
+    </MDBContainer>
   );
 };
 

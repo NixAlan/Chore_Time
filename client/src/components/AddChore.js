@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { navigate } from "@reach/router";
 import axios from "axios";
+import { MDBContainer, MDBInput, MDBBtn } from "mdb-react-ui-kit";
 
 const AddChore = (props) => {
   const [choreName, setChoreName] = useState("");
@@ -40,21 +41,24 @@ const AddChore = (props) => {
     }
   };
   return (
-    <div className="oneContainer">
+    <MDBContainer className="border">
       <form>
-        <div>
-          <label>name:</label>
-          <input
+        <MDBContainer className="col-md-4">
+          <MDBInput
+            className="mb-4"
             type="text"
             name="name"
+            label="Chore Name"
             value={choreName}
             onChange={(e) => onChangeHandle(e)}
           />
-        </div>
-        <button onClick={submitHandle}>Submit</button>
-        {error ? <p>{error}</p> : null}
+          <MDBBtn color="info" className="mb-3" onClick={submitHandle}>
+            Submit
+          </MDBBtn>
+          {error ? <p>{error}</p> : null}
+        </MDBContainer>
       </form>
-    </div>
+    </MDBContainer>
   );
 };
 

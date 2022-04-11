@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { navigate } from "@reach/router";
+import { MDBContainer, MDBInput, MDBBtn } from "mdb-react-ui-kit";
 
 const OneChore = (props) => {
   const { id } = props;
@@ -59,27 +60,23 @@ const OneChore = (props) => {
       });
   };
   return (
-    <div className="oneContainer">
-      <div className="container">
-        <div>
-          <p>Completed By:</p>
+    <MDBContainer className="border">
+      <p>Completed By:</p>
 
-          {childList.length > 0 ? (
-            <select onChange={handleChange}>
-              <option value=""></option>
-              {childList.map((child, index) => {
-                return (
-                  <option key={child._id} value={child.name}>
-                    {child.name}
-                  </option>
-                );
-              })}
-            </select>
-          ) : null}
-          <button onClick={handleSubmit}>Submit</button>
-        </div>
-      </div>
-    </div>
+      {childList.length > 0 ? (
+        <select onChange={handleChange}>
+          <option value=""></option>
+          {childList.map((child, index) => {
+            return (
+              <option key={child._id} value={child.name}>
+                {child.name}
+              </option>
+            );
+          })}
+        </select>
+      ) : null}
+      <button onClick={handleSubmit}>Submit</button>
+    </MDBContainer>
   );
 };
 export default OneChore;

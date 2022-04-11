@@ -5,7 +5,7 @@ import Header from "../components/Header";
 const RegView = (props) => {
   return (
     <div>
-      <Header link={""} linkText={""} title={"Registration"} />
+      <h1>Registration</h1>
       <Registration />
     </div>
   );

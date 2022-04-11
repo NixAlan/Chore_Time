@@ -94,7 +94,7 @@ const Login = (props) => {
           value={login.password}
           onChange={(e) => onChangeHandle(e)}
         />
-        <MDBBtn type="submit" onClick={handleLogin}>
+        <MDBBtn size="sm" type="submit" onClick={handleLogin}>
           Submit
         </MDBBtn>
         {errors ? <p>{errors.message}</p> : null}

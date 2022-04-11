@@ -53,12 +53,9 @@ const Home = (props) => {
   };
 
   return (
-    <MDBContainer
-      className="border"
-      style={{ backgroundColor: "#E0F2F1", width: "80%" }}
-    >
+    <MDBContainer className="border">
       <MDBRow around>
-        <MDBCol size="4" className="">
+        <MDBCol size="4">
           <p>Select a Child to check which chores they have completed</p>
           {childList
             ? childList.map((child, index) => {
@@ -89,7 +86,12 @@ const Home = (props) => {
                   <div key={index}>
                     <MDBContainer className="mb-2">
                       <p className="mb-0">{chore.name}</p>
-                      <MDBBtn size="sm" onClick={() => handleAssign(chore._id)}>
+                      <MDBBtn
+                        className=""
+                        color="info"
+                        size="sm"
+                        onClick={() => handleAssign(chore._id)}
+                      >
                         Asign to Child
                       </MDBBtn>
                     </MDBContainer>

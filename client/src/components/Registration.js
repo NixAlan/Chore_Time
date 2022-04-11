@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { navigate } from "@reach/router";
 import axios from "axios";
+import {
+  MDBInput,
+  MDBCol,
+  MDBRow,
+  MDBBtn,
+  MDBCheckbox,
+  MDBContainer,
+} from "mdb-react-ui-kit";
 
 const Registration = (props) => {
   const [registration, setRegistration] = useState({
@@ -34,60 +42,64 @@ const Registration = (props) => {
       });
   };
   return (
-    <div className="oneContainer">
+    <MDBContainer className="border col-md-4 bm-4 pt-4 ">
       <form>
-        <div className="containerReg">
-          <div className="containerCol">
+        {/* <div className="containerCol">
             <p>Email:</p>
             <p>User Name:</p>
             <p>Password:</p>
             <p>Confirm Password:</p>
-          </div>
-          <div className="containerCol">
-            <p>
-              {" "}
-              <input
-                type="text"
-                name="email"
-                value={registration.email}
-                onChange={(e) => onChangeHandle(e)}
-              />
-            </p>
-            {errors.errors ? <p>{errors.errors.email.message}</p> : null}
-            <p>
-              <input
-                type="text"
-                name="username"
-                value={registration.userName}
-                onChange={(e) => onChangeHandle(e)}
-              />
-            </p>
-            {errors.errors ? <p>{errors.errors.username.message}</p> : null}
-            <p>
-              <input
-                type="password"
-                name="password"
-                value={registration.password}
-                onChange={(e) => onChangeHandle(e)}
-              />
-            </p>
-            {errors.errors ? <p>{errors.errors.password.message}</p> : null}
-            <p>
-              <input
-                type="password"
-                name="confirmPassword"
-                value={registration.confirmPassword}
-                onChange={(e) => onChangeHandle(e)}
-              />
-            </p>
-            {errors.errors ? (
-              <p>{errors.errors.confirmPassword.message}</p>
-            ) : null}
-          </div>
-        </div>
-        <button onClick={submitHandle}>Submit</button>
+          </div> */}
+
+        <MDBInput
+          className="mb-4"
+          type="text"
+          name="email"
+          label="Email"
+          value={registration.email}
+          onChange={(e) => onChangeHandle(e)}
+        />
+
+        {errors.errors ? <p>{errors.errors.email.message}</p> : null}
+
+        <MDBInput
+          className="mb-4"
+          type="text"
+          label="Username"
+          name="username"
+          value={registration.userName}
+          onChange={(e) => onChangeHandle(e)}
+        />
+
+        {errors.errors ? <p>{errors.errors.username.message}</p> : null}
+
+        <inMDBInputput
+          className="mb-4"
+          type="password"
+          label="Password"
+          name="password"
+          value={registration.password}
+          onChange={(e) => onChangeHandle(e)}
+        />
+
+        {errors.errors ? <p>{errors.errors.password.message}</p> : null}
+
+        <MDBInput
+          className="mb-4"
+          type="password"
+          label="Confirm Password"
+          name="confirmPassword"
+          value={registration.confirmPassword}
+          onChange={(e) => onChangeHandle(e)}
+        />
+
+        {errors.errors ? <p>{errors.errors.confirmPassword.message}</p> : null}
+
+        <MDBBtn type="submit" onClick={submitHandle} size="sm" className="mb-4">
+          Submit
+        </MDBBtn>
       </form>
-    </div>
+    </MDBContainer>
   );
 };
 
