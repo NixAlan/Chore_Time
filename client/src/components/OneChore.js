@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { navigate } from "@reach/router";
+import { useNavigate, useParams } from "react-router-dom";
 import { MDBContainer, MDBInput, MDBBtn } from "mdb-react-ui-kit";
 
 const OneChore = (props) => {
-  const { id } = props;
+  const { id } = useParams();
   const [chore, setChore] = useState({});
   const [childList, setChildList] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios

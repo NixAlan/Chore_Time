@@ -1,14 +1,15 @@
 import React, { useState } from "react";
-import { navigate } from "@reach/router";
+
 import axios from "axios";
 import { MDBContainer, MDBInput, MDBBtn } from "mdb-react-ui-kit";
-
+import { useNavigate } from "react-router-dom";
 const AddChore = (props) => {
   const [choreName, setChoreName] = useState("");
   const [error, setError] = useState("");
   const onChangeHandle = (e) => {
     setChoreName(e.target.value);
   };
+  const navigate = useNavigate();
 
   const submitHandle = (e) => {
     e.preventDefault();
@@ -45,7 +46,7 @@ const AddChore = (props) => {
       <form>
         <MDBContainer className="col-md-4">
           <MDBInput
-            className="mb-4"
+            className="mb-4 mt-4"
             type="text"
             name="name"
             label="Chore Name"

@@ -1,13 +1,7 @@
-import { navigate } from "@reach/router";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import {
-  MDBInput,
-  MDBCol,
-  MDBRow,
-  MDBBtn,
-  MDBCheckbox,
-} from "mdb-react-ui-kit";
+import { MDBInput, MDBBtn } from "mdb-react-ui-kit";
 
 const Login = (props) => {
   const [login, setLogin] = useState({
@@ -16,6 +10,7 @@ const Login = (props) => {
   });
   const [errors, setErrors] = useState({});
   const newSateObject = { ...login };
+  const navigate = useNavigate();
 
   const onChangeHandle = (e) => {
     newSateObject[e.target.name] = e.target.value;

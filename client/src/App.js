@@ -1,4 +1,5 @@
 import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import LogInView from "./views/LogIn";
 import { Router } from "@reach/router";
@@ -13,16 +14,18 @@ import EndOFWeekView from "./views/EndOfWeekView";
 function App() {
   return (
     <div className="App">
-      <Router>
-        <LogInView path="/" />
-        <RegView path="/reg" />
-        <HomeView path="/parentDashboard" />
-        <AddChildView path="/addChildView" />
-        <AddChoreView path="/addChoreView" />
-        <EndOFWeekView path="/endOfWeekView" />
-        <OneChoreView path="/oneChoreView/edit/:id" />
-        <OneChildView path="/oneChildView/edit/:id" />
-      </Router>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<LogInView />} />
+          <Route path="/reg" element={<RegView />} />
+          <Route path="/parentDashboard" element={<HomeView />} />
+          <Route path="/addChildView" element={<AddChildView />} />
+          <Route path="/addChoreView" element={<AddChoreView />} />
+          <Route path="/endOfWeekView" element={<EndOFWeekView />} />
+          <Route path="/oneChoreView/edit/:id" element={<OneChoreView />} />
+          <Route path="/oneChildView/edit/:id" element={<OneChildView />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

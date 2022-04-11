@@ -1,11 +1,11 @@
 import React from "react";
-import { Link } from "@reach/router";
+import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
-import { navigate } from "@reach/router";
 import { MDBContainer, MDBRow, MDBCol, MDBBtn } from "mdb-react-ui-kit";
 
 const Header = (props) => {
   const { link, linkText, title } = props;
+  const navigate = useNavigate();
 
   const handleLogOut = () => {
     axios

@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { navigate } from "@reach/router";
+import React, { useState } from "react";
+//import { navigate } from "@reach/router";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import {
   MDBInput,
@@ -19,6 +20,7 @@ const Registration = (props) => {
   });
   const [errors, setErrors] = useState({});
   const newSateObject = { ...registration };
+  const navigate = useNavigate();
   const onChangeHandle = (e) => {
     newSateObject[e.target.name] = e.target.value;
     console.log("e.target.name =", e.target.name);
@@ -73,7 +75,7 @@ const Registration = (props) => {
 
         {errors.errors ? <p>{errors.errors.username.message}</p> : null}
 
-        <inMDBInputput
+        <MDBInput
           className="mb-4"
           type="password"
           label="Password"

@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { navigate, Link } from "@reach/router";
+import { useNavigate, Link } from "react-router-dom";
 import { MDBContainer, MDBRow, MDBCol, MDBBtn } from "mdb-react-ui-kit";
 //900
 const Home = (props) => {
   const [childList, setChildList] = useState([]);
   const [user, setUser] = useState("");
   const [choreList, setChoreList] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getAppInfo = async () => {
@@ -16,6 +17,7 @@ const Home = (props) => {
         });
         console.log(res);
         setUser(res.data);
+        localStorage.setItem("username", res.data.username);
         console.log(user);
 
         const res2 = await axios.get(
@@ -49,7 +51,7 @@ const Home = (props) => {
     getAppInfo();
   }, []);
   const handleAssign = (idFromBelow) => {
-    navigate(`oneChoreView/edit/${idFromBelow}`);
+    navigate(`/oneChoreView/edit/${idFromBelow}`);
   };
 
   return (

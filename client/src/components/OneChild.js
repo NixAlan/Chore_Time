@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { navigate } from "@reach/router";
 import { MDBContainer, MDBRow, MDBCol, MDBBtn } from "mdb-react-ui-kit";
+import { useNavigate, useParams } from "react-router-dom";
 
 const OneChild = (props) => {
-  const { id } = props;
+  const { id } = useParams();
   const [child, setChild] = useState({});
   const [choreList, setChoreList] = useState([]);
   const [credit, setCredit] = useState(0);
   const [disable, setDisable] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getChildById = async (props) => {
@@ -98,9 +99,15 @@ const OneChild = (props) => {
           })}
         </tbody>
       </table>
-      <button disabled={disable} onClick={handleUpdate}>
+      <MDBBtn
+        size="sm"
+        className="mb-4 mt-4"
+        color="info"
+        disabled={disable}
+        onClick={handleUpdate}
+      >
         Update Points
-      </button>
+      </MDBBtn>
       {disable ? <p>Points Must be greater then 0 to Update</p> : null}
     </MDBContainer>
   );
