@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { navigate } from "@reach/router";
+import {
+  MDBContainer,
+  MDBRow,
+  MDBCol,
+  MDBBtn,
+  MDBInput,
+} from "mdb-react-ui-kit";
 
 const EndOfWeek = () => {
   const [childList, setChildList] = useState([]);
   const [totalPoints, setTotalPoints] = useState(0);
-  const [aatw, setAatw] = useState(15); // Allowance Available this week
+  const [aatw, setAatw] = useState(""); // Allowance Available this week
   const [poinstPerChild, setPointsPerChild] = useState([]);
   const [disable, setDisable] = useState(false);
   const [processError, setProcessError] = useState("");
-  const [payment, setPayment] = useState(0);
+  const [payment, setPayment] = useState();
   const [loading, setLoadding] = useState(true);
 
   useEffect(() => {
@@ -116,28 +122,27 @@ const EndOfWeek = () => {
     }
   };
   return (
-    <div className="oneContainer">
-      <div className="containerRow">
-        <div>
-          <label>Allowance Available This Week:</label>
-          <input
+    <MDBContainer className="border">
+      <MDBRow className="mt-4 d-flex justify-content-center">
+        <MDBCol size="4">
+          <MDBInput
+            className="mb-4"
+            label="Total Allowance Available"
             name="aatw"
             type="Number"
             value={aatw}
             onChange={(e) => setAatw(e.target.value)}
             style={{ marginLeft: "5px" }}
           />
-        </div>
-        <div style={{ marginTop: "5px" }}>
-          <label>Allowance Payment Amount:</label>
-          <input
-            type="number"
+          <MDBInput
+            className="mb-4"
+            label="Allowance Payment Amount"
+            type="Number"
             value={parseInt(Math.abs(payment))}
             onChange={(e) => onSetPaymentAmount(e)}
-            style={{ marginLeft: "22px" }}
           />
-        </div>
-      </div>
+        </MDBCol>
+      </MDBRow>
       <table
         style={{
           width: "100%",
@@ -166,20 +171,24 @@ const EndOfWeek = () => {
                 </td>
                 <td>{child.allowanceEarned}</td>
                 <td>
-                  <button onClick={() => makePayment(child._id)}>
+                  <MDBBtn
+                    size="sm"
+                    color="info"
+                    onClick={() => makePayment(child._id)}
+                  >
                     Make Allowance Payment
-                  </button>
+                  </MDBBtn>
                 </td>
               </tr>
             );
           })}
         </tbody>
       </table>
-      <button disabled={disable} onClick={onProcess}>
+      <MDBBtn size="sm" color="info" disabled={disable} onClick={onProcess}>
         Process Chore Week
-      </button>
+      </MDBBtn>
       {disable ? <p>{processError}</p> : <p></p>}
-    </div>
+    </MDBContainer>
   );
 };
 

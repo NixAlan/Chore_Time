@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import { MDBContainer, MDBInput, MDBBtn } from "mdb-react-ui-kit";
+import { MDBContainer } from "mdb-react-ui-kit";
 
 const OneChore = (props) => {
   const { id } = useParams();

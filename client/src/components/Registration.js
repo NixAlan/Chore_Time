@@ -1,15 +1,7 @@
 import React, { useState } from "react";
-//import { navigate } from "@reach/router";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import {
-  MDBInput,
-  MDBCol,
-  MDBRow,
-  MDBBtn,
-  MDBCheckbox,
-  MDBContainer,
-} from "mdb-react-ui-kit";
+import { MDBInput, MDBBtn, MDBContainer } from "mdb-react-ui-kit";
 
 const Registration = (props) => {
   const [registration, setRegistration] = useState({

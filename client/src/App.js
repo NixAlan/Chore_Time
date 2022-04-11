@@ -2,7 +2,6 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import LogInView from "./views/LogIn";
-import { Router } from "@reach/router";
 import RegView from "./views/Reg";
 import HomeView from "./views/HomeView";
 import AddChildView from "./views/AddChildView";

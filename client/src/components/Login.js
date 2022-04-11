@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { MDBInput, MDBBtn } from "mdb-react-ui-kit";
 
 const Login = (props) => {

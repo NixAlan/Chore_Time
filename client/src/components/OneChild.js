@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { MDBContainer, MDBRow, MDBCol, MDBBtn } from "mdb-react-ui-kit";
+import { MDBContainer, MDBBtn } from "mdb-react-ui-kit";
 import { useNavigate, useParams } from "react-router-dom";
 
 const OneChild = (props) => {

@@ -4,7 +4,7 @@ import axios from "axios";
 import { MDBContainer, MDBRow, MDBCol, MDBBtn } from "mdb-react-ui-kit";
 
 const Header = (props) => {
-  const { link, linkText, title } = props;
+  const { title } = props;
   const navigate = useNavigate();
 
   const handleLogOut = () => {
